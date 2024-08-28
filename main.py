@@ -16,8 +16,19 @@ from llama_index.core.postprocessor import SimilarityPostprocessor
 ## set up sreamlit app
 st.set_page_config(page_title="Document Query Engine", page_icon=":mag:", layout="wide")
 st.title("Document Query Engine")
-st.subheader("Upload your files and query the document index")
 
+# workflow examples
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Upload your files and query the document index")
+    st.markdown("This is a simple document query engine that allows you to upload your files and query the document index")
+ 
+with col2:
+    st.subheader("How it works")
+    st.markdown("1. Upload your files")
+    st.markdown("2. Enter your query")
+    st.markdown("3. Click submit to get the response")
 
 ## get temprature and top_k in the sidebar
 temprature = st.sidebar.slider("Temprature", min_value=0.0, max_value=1.0, value=0.2, step=0.1)
@@ -31,6 +42,10 @@ api_key = st.sidebar.text_input("Enter your OpenAI API Key", type="password")
 
 Settings.llm = OpenAI(api_key=api_key,temperature=temprature, model="gpt-3.5-turbo")
 
+# sidebar
+st.sidebar.markdown("### Customization")
+st.sidebar.markdown("Model Settings: Adjust the OpenAI model and temperature settings in the Streamlit sidebar to tailor the response generation to your needs.")
+st.sidebar.markdown("Similarity Top K: Adjust the number of similar documents to retrieve from the index.")
 
 ## multifile upload with streamlit
 # get the file list
