@@ -1,4 +1,4 @@
-# streamline-document-query-engine
+# streamlit Document Query Engine
 *** 
 
 ### Overview
