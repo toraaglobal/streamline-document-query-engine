@@ -31,8 +31,10 @@ with col2:
     st.markdown("3. Click submit to get the response")
 
 ## get temprature and top_k in the sidebar
+st.sidebar.markdown("### Settings")
 temprature = st.sidebar.slider("Temprature", min_value=0.0, max_value=1.0, value=0.2, step=0.1)
 similarity_top_k = st.sidebar.slider("Similarity Top K", min_value=1, max_value=100, value=10, step=1)
+similarity_cutoff = st.sidebar.slider("Similarity Cutoff", min_value=0.0, max_value=1.0, value=0.7, step=0.1)
 
 
 # Set the OpenAI model and temperature
@@ -86,7 +88,7 @@ if uploaded_files:
     # The query engine is used to query the index and generate a response
     query_engine = RetrieverQueryEngine(
         retriever=retriever,
-        node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=0.7, # filter nodes with similarity score below the cutoff 
+        node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=similarity_cutoff, # filter nodes with similarity score below the cutoff 
                                                     filter_empty=True,  # filter empty nodes
                                                     filter_duplicates=True,  # filter duplicate nodes
                                                     filter_similar=True,  # filter similar nodes
